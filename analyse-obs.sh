@@ -3,8 +3,17 @@
 #.. Nicolas Martin
 #.. Updated the May 19th 2016 by Adrien Cerdan
 
+# All analyses are done with wordom
+
+# /!\ Most of the observable require that you specifiy a list of 
+# /!\ trajectory files to analyse name dcd.txt
+
+# specifiy the path (if not in $PATH) and name of the executable
 wordom="wordom"
+# Specify the size of the bins for the running average
 avg=500
+
+# HELP
 
 if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
 
@@ -13,8 +22,9 @@ if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
   echo "Info: Possible observables to analyze are :"
   echo "Info: tiltM2, tiltB, twist, DVP, PPS, GLU, hole, all"
   echo "Info: Check the code for further informations."
-  echo "Info: Use the option -smooth to option the smoothen curve of you data"
-  echo "Info: For statistics use: all -stat xxxx, with xxxx the starting frame"
+  echo "Info: Use the option -smooth to compute running averages of your data"
+  # add end  and skip
+  echo "Info: To obtains statistics on your data use: all -stat beg (starting frame to analyze)"
   echo "Info: type analyse.sh --help to read this again." 
   echo " "
 
@@ -23,7 +33,7 @@ fi
 if [ "$1" == "all" ] && [ "$2" == "-stat" ] ; then
   if [ $# -lt 3 ]
   then
-    echo "Need to specify the starting frame"
+    echo "You must specify the starting frame"
     echo "expl: ./analyses all -stat 1500"
     exit 1
   fi
@@ -51,6 +61,7 @@ if [ "$1" == "all" ] && [ "$2" == "-stat" ] ; then
   echo "==============================="
   exit 0
 fi
+
 ##################
 ## TILTM2 UPPER ##
 ##################
