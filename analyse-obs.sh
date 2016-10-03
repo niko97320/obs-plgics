@@ -64,11 +64,11 @@ fi
 if [ "$1" == "tiltM2lower" ] || [ "$1" == "all" ] ; then
   echo "## Computing TILTM2 lower##"
  # clean previous run
-  if [ -f tiltM2lowner.out ] ; then
+  if [ -f tiltM2lower.out ] ; then
   rm tiltM2lower.out
   fi
 
-  ${wordom} -iA ${wdmPath}/tiltM2lower.wdm -imol all.pdb -itrj dcd.txt >> tiltM2lownr.out
+  ${wordom} -iA ${wdmPath}/tiltM2lower.wdm -imol all.pdb -itrj dcd.txt >> tiltM2lower.out
 
   # compute average over the 5 subunits
   rm tiltM2lower_avg.out
