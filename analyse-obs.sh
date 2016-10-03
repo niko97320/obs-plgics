@@ -415,7 +415,7 @@ fi
 if  [ "$1" == "hole" ] ; then
   echo "## Computing hole  ##"
 
-  ${wordom} -iA hole.wdm -imol all.pdb -itrj alignedFullTrj.dcd
+  ${wordom} -iA hole.wdm -imol all.pdb -itrj dcd_aligned.txt
 
 fi
 
