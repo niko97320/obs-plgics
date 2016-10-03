@@ -32,38 +32,6 @@ if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
 
 fi
 
-if [ "$1" == "all" ] && [ "$2" == "-stat" ] ; then
-  if [ $# -lt 3 ]
-  then
-    echo "You must specify the starting frame"
-    echo "expl: ./analyses all -stat 1500"
-    exit 1
-  fi
-  echo "==============================="
-  echo "Tilt M2 pol:"
-  ./avg_analyses.py tiltM2_avg.out 0 $3
-  echo "==============================="
-  echo "Tilt M2 az:"
-  ./avg_analyses.py tiltM2_avg.out 1 $3
-  echo "==============================="
-  echo "Tilt B pol:"
-  ./avg_analyses.py tiltB_avg.out 0 $3
-  echo "==============================="
-  echo "Tilt B az:"
-  ./avg_analyses.py tiltB_avg.out 1 $3
-  echo "==============================="
-   echo "Twist:"
-  ./avg_analyses.py twist_avg.out 0 $3
-  echo "==============================="
-  echo "PPS 9':"
-  ./avg_analyses.py PPS-surf-9prime.out 0 $3
-  echo "==============================="
-  echo "PPS -2':"
-  ./avg_analyses.py PPS-surf-2prime.out 0 $3
-  echo "==============================="
-  exit 0
-fi
-
 ##################
 ## TILTM2 UPPER ##
 ##################
@@ -418,6 +386,43 @@ if  [ "$1" == "hole" ] ; then
   ${wordom} -iA ${wdmPath}/hole.wdm -imol all.pdb -itrj dcd_aligned.txt
 
 fi
+
+###########
+## STATS ##
+###########
+
+if [ "$1" == "all" ] && [ "$2" == "-stat" ] ; then
+  if [ $# -lt 3 ]
+  then
+    echo "You must specify the starting frame"
+    echo "expl: ./analyses all -stat 1500"
+    exit 1
+  fi
+  echo "==============================="
+  echo "Tilt M2 pol:"
+  ./avg_analyses.py tiltM2_avg.out 0 $3
+  echo "==============================="
+  echo "Tilt M2 az:"
+  ./avg_analyses.py tiltM2_avg.out 1 $3
+  echo "==============================="
+  echo "Tilt B pol:"
+  ./avg_analyses.py tiltB_avg.out 0 $3
+  echo "==============================="
+  echo "Tilt B az:"
+  ./avg_analyses.py tiltB_avg.out 1 $3
+  echo "==============================="
+   echo "Twist:"
+  ./avg_analyses.py twist_avg.out 0 $3
+  echo "==============================="
+  echo "PPS 9':"
+  ./avg_analyses.py PPS-surf-9prime.out 0 $3
+  echo "==============================="
+  echo "PPS -2':"
+  ./avg_analyses.py PPS-surf-2prime.out 0 $3
+  echo "==============================="
+  exit 0
+fi
+
 
 #####################
 ## PLOT            ##
