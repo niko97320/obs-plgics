@@ -10,6 +10,8 @@
 
 # specifiy the path (if not in $PATH) and name of the executable
 wordom="wordom"
+# specifiy path for wdm analysis files
+wdmPath="obs-plgics/wdm-glucl"
 # Specify the size of the bins for the running average
 avg=500
 
@@ -73,7 +75,7 @@ if [ "$1" == "tiltM2upper" ] || [ "$1" == "all" ] ; then
   rm tiltM2upper.out
   fi
 
-  ${wordom} -iA tiltM2upper.wdm -imol all.pdb -itrj dcd.txt >> tiltM2upper.out
+  ${wordom} -iA ${wdmPath}/tiltM2upper.wdm -imol all.pdb -itrj dcd.txt >> tiltM2upper.out
 
   # compute average over the 5 subunits
   rm tiltM2upper_avg.out
@@ -98,7 +100,7 @@ if [ "$1" == "tiltM2lower" ] || [ "$1" == "all" ] ; then
   rm tiltM2lower.out
   fi
 
-  ${wordom} -iA tiltM2lower.wdm -imol all.pdb -itrj dcd.txt >> tiltM2lownr.out
+  ${wordom} -iA ${wdmPath}/tiltM2lower.wdm -imol all.pdb -itrj dcd.txt >> tiltM2lownr.out
 
   # compute average over the 5 subunits
   rm tiltM2lower_avg.out
@@ -122,7 +124,7 @@ if [ "$1" == "tiltM2" ] || [ "$1" == "all" ] ; then
   rm tiltM2.out
   fi
 
-  ${wordom} -iA tiltM2.wdm -imol all.pdb -itrj dcd.txt >> tiltM2.out
+  ${wordom} -iA ${wdmPath}/tiltM2.wdm -imol all.pdb -itrj dcd.txt >> tiltM2.out
 
 
    if [ "$2" == "-smooth" ] ; then
@@ -156,7 +158,7 @@ if [ "$1" == "tiltB" ] || [ "$1" == "all" ] ; then
   rm tiltB.out
   fi
 
-  ${wordom} -iA tiltB.wdm -itrj dcd.txt -imol all.pdb >> tiltB.out
+  ${wordom} -iA ${wdmPath}/tiltB.wdm -itrj dcd.txt -imol all.pdb >> tiltB.out
 
   # compute average over the 5 subunits
   rm tiltB_avg.out
@@ -180,7 +182,7 @@ if  [ "$1" == "twist" ] || [ "$1" == "all" ] ; then
     rm twist.out 
     fi
 
-    ${wordom} -iA twist.wdm -itrj dcd.txt -imol all.pdb >> twist.out
+    ${wordom} -iA ${wdmPath}/twist.wdm -itrj dcd.txt -imol all.pdb >> twist.out
 
   # compute average over the 5 subunits
   rm twist_avg.out
@@ -203,7 +205,7 @@ if  [ "$1" == "DVP" ] || [ "$1" == "all" ] ; then
   rm DVP.out
   fi
 
-  ${wordom} -iA dist-V45-P268.wdm -imol all.pdb -itrj dcd.txt >> DVP.out
+  ${wordom} -iA ${wdmPath}/dist-V45-P268.wdm -imol all.pdb -itrj dcd.txt >> DVP.out
 
   # compute average over the 5 subunits
   rm DVP_avg.out
@@ -231,7 +233,7 @@ if  [ "$1" == "GLU" ] || [ "$1" == "all" ] ; then
   rm GLU.out
   fi
 
-  ${wordom} -iA glu-RMSD.wdm -imol all.pdb -itrj dcd.txt >> GLU.out
+  ${wordom} -iA ${wdmPath}/glu-RMSD.wdm -imol all.pdb -itrj dcd.txt >> GLU.out
 
   if [ $2 == "-smooth" ] ; then
   echo "Computing average of the TS..."
@@ -250,7 +252,7 @@ if  [ "$1" == "IVM" ] || [ "$1" == "all" ] ; then
   rm IVM.out
   fi
 
-  ${wordom} -iA IVM-RMSD.wdm -imol all.pdb -itrj dcd.txt >> IVM.out
+  ${wordom} -iA ${wdmPath}/IVM-RMSD.wdm -imol all.pdb -itrj dcd.txt >> IVM.out
 
   if [ "$2" == "-smooth" ] ; then
   echo "Computing average of the TS..."
@@ -269,7 +271,7 @@ if  [ "$1" == "IVMHB" ] || [ "$1" == "all" ] ; then
   rm dist-IVM-R287.out
   fi
 
-  ${wordom} -iA dist-IVM-R287.wdm -imol all.pdb -itrj dcd.txt >> dist-IVM-R287.out
+  ${wordom} -iA ${wdmPath}/dist-IVM-R287.wdm -imol all.pdb -itrj dcd.txt >> dist-IVM-R287.out
 
   if [ "$2" == "-smooth" ] ; then
   echo "Computing average of the TS..."
@@ -288,7 +290,7 @@ if  [ "$1" == "PPS13" ] || [ "$1" == "all" ] ; then
   rm PPS-dist-13prime.out
   fi
 
-  ${wordom} -iA PPS-13prime.wdm -imol all.pdb -itrj dcd.txt >> PPS-dist-13prime.out
+  ${wordom} -iA ${wdmPath}/PPS-13prime.wdm -imol all.pdb -itrj dcd.txt >> PPS-dist-13prime.out
   # calculation of the pentagone area
   echo "Computing Pentagone Pore area ..." 
   grep -v "#" PPS-dist-13prime.out | awk '{side=($6+$2+$3+$4+$5)/5; print side*side*1.7204}' > PPS-surf-13prime.out
@@ -308,7 +310,7 @@ if  [ "$1" == "PPS9" ] || [ "$1" == "all" ] ; then
   rm PPS-dist-9prime.out
   fi
 
-  ${wordom} -iA PPS-9prime.wdm -imol all.pdb -itrj dcd.txt >> PPS-dist-9prime.out
+  ${wordom} -iA ${wdmPath}/PPS-9prime.wdm -imol all.pdb -itrj dcd.txt >> PPS-dist-9prime.out
   # calculation of the pentagone area
   echo "Computing Pentagone Pore area ..." 
   grep -v "#" PPS-dist-9prime.out | awk '{side=($6+$2+$3+$4+$5)/5; print side*side*1.7204}' > PPS-surf-9prime.out
@@ -329,7 +331,7 @@ if  [ "$1" == "PPS2" ] || [ "$1" == "all" ] ; then
   rm PPS-dist-2prime.out
   fi
 
-  ${wordom} -iA PPS-2prime.wdm -imol all.pdb -itrj dcd.txt >> PPS-dist-2prime.out
+  ${wordom} -iA ${wdmPath}/PPS-2prime.wdm -imol all.pdb -itrj dcd.txt >> PPS-dist-2prime.out
   # calculation of the pentagone area
   echo "Computing Pentagone Pore area ..." 
   grep -v "#" PPS-dist-2prime.out | awk '{side=($6+$2+$3+$4+$5)/5; print side*side*1.7204}' > PPS-surf-2prime.out
@@ -352,7 +354,7 @@ if [ "$1" == "chi1" ] || [ "$1" == "all" ] ; then
   rm chi1-13.out
   fi
 
-  ${wordom} -iA chi1-13.wdm -imol all.pdb -itrj dcd.txt >> chi1-13.out
+  ${wordom} -iA ${wdmPath}/chi1-13.wdm -imol all.pdb -itrj dcd.txt >> chi1-13.out
 
 
    if [ "$2" == "-smooth" ] ; then
@@ -373,8 +375,6 @@ if [ "$1" == "chi1" ] || [ "$1" == "all" ] ; then
 fi
 
 
-
-
 ############
 ## CHI1 9` ##
 ############
@@ -386,7 +386,7 @@ if [ "$1" == "chi1" ] || [ "$1" == "all" ] ; then
   rm chi1-9.out
   fi
 
-  ${wordom} -iA chi1-9.wdm -imol all.pdb -itrj dcd.txt >> chi1-9.out
+  ${wordom} -iA ${wdmPath}/chi1-9.wdm -imol all.pdb -itrj dcd.txt >> chi1-9.out
 
 
    if [ "$2" == "-smooth" ] ; then
@@ -415,7 +415,7 @@ fi
 if  [ "$1" == "hole" ] ; then
   echo "## Computing hole  ##"
 
-  ${wordom} -iA hole.wdm -imol all.pdb -itrj dcd_aligned.txt
+  ${wordom} -iA ${wdmPath}/hole.wdm -imol all.pdb -itrj dcd_aligned.txt
 
 fi
 
