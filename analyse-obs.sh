@@ -91,23 +91,23 @@ fi
 ## TILTM2 DOWMER ##
 ##################
 
-if [ "$1" == "tiltM2downer" ] || [ "$1" == "all" ] ; then
-  echo "## Computing TILTM2 downer##"
+if [ "$1" == "tiltM2lower" ] || [ "$1" == "all" ] ; then
+  echo "## Computing TILTM2 lower##"
  # clean previous run
-  if [ -f tiltM2downer.out ] ; then
-  rm tiltM2downer.out
+  if [ -f tiltM2lowner.out ] ; then
+  rm tiltM2lower.out
   fi
 
-  ${wordom} -iA tiltM2downer.wdm -imol all.pdb -itrj dcd.txt >> tiltM2downer.out
+  ${wordom} -iA tiltM2lower.wdm -imol all.pdb -itrj dcd.txt >> tiltM2lownr.out
 
   # compute average over the 5 subunits
-  rm tiltM2downer_avg.out
-  grep -v "#" tiltM2downer.out | awk '{sumt=0;sump=0 ; sumt += $2+$4+$6+$8+$10 ; sump += $3+$5+$7+$9+$11; print sumt/5"\t"sump/5}' > tiltM2downer_avg.out
+  rm tiltM2lower_avg.out
+  grep -v "#" tiltM2lower.out | awk '{sumt=0;sump=0 ; sumt += $2+$4+$6+$8+$10 ; sump += $3+$5+$7+$9+$11; print sumt/5"\t"sump/5}' > tiltM2lower_avg.out
 
   # compute the Smoothen curve 
   if [ "$2" == "-smooth" ] ; then
   echo "Computing average of the TS..."
-  grep -v "#" tiltM2downer_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t%s\n", "#nFr","Theta","Phi"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\t%s\n", line, sum1/avg, sum2/avg ; sum1=0 ; sum2=0; line=line+avg;}' > tiltM2downer_avg_smooth.out
+  grep -v "#" tiltM2lower_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t%s\n", "#nFr","Theta","Phi"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\t%s\n", line, sum1/avg, sum2/avg ; sum1=0 ; sum2=0; line=line+avg;}' > tiltM2lower_avg_smooth.out
   fi
 fi
 
