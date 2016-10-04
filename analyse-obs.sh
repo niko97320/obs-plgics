@@ -48,7 +48,7 @@ if [ "$1" == "m2m3" ] || [ "$1" == "all" ] ; then
   rm -f m2m3_dist_avg.out 
   grep -v "#" m2m3_dist.out | awk '{sum=0; sum += $2+$3+$4+$5+$6 ; print $1"\t"sum/5}' > m2m3_dist_avg.out
 
-
+fi
 ##########
 ## FLUX ##
 ##########
