@@ -33,6 +33,22 @@ if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
 fi
 
 
+################
+## M2-M3 dist ##
+################
+if [ "$1" == "m2m3" ] || [ "$1" == "all" ] ; then
+  echo "## Computing M2-M3 distance##"
+ # clean previous run
+  if [ -f m2m3_dist.out ] ; then
+  rm m2m3_dist.out
+  fi
+  ${wordom} -iA ${wdmPath}/m2m3_dist.wdm -imol all.pdb -itrj dcd.txt -otxt m2m3_dist.out
+
+  # compute average over the 5 subunits
+  rm -f m2m3_dist_avg.out 
+  grep -v "#" m2m3_dist.out | awk '{sum=0; sum += $2+$3+$4+$5+$6 ; print $1"\t"sum/5}' > m2m3_dist_avg.out
+
+
 ##########
 ## FLUX ##
 ##########
@@ -62,7 +78,7 @@ ${wordom} -iA ${wdmPath}/water_flux.wdm -imol all.pdb -itrj dcd_aligned.txt -otx
 
 # ions
 ${wordom} -iA ${wdmPath}/ions_flux.wdm -imol all.pdb -itrj dcd_aligned.txt -otxt transition-ions.out 2> err-ions.out
-
+fi
 
 ##################
 ## TILTM2 UPPER ##
