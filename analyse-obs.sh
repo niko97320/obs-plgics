@@ -32,6 +32,38 @@ if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
 
 fi
 
+
+##########
+## FLUX ##
+##########
+
+if [ "$1" == "flux" ] || [ "$1" == "all" ] ; then
+  echo "## Computing Water and Ions flux##"
+  echo "## WARNING: you should use an aligned trajectory for this analysis"
+ # clean previous run
+  if [ -f transition-waters.out ] ; then
+  rm transition-waters.out
+  fi
+ # clean previous run
+  if [ -f transition-ions.out ] ; then
+  rm transition-ions.out
+  fi
+ # clean previous run
+  if [ -f err-waters.out ] ; then
+  rm err-waters.out
+  fi
+ # clean previous run
+  if [ -f err-ions.out ] ; then
+  rm err-ions.out
+  fi
+
+# waters
+${wordom} -iA ${wdmPath}/water_flux.wdm -imol all.pdb -itrj dcd_aligned.txt -otxt transition-waters.out 2> err-waters.out
+
+# ions
+${wordom} -iA ${wdmPath}/ions_flux.wdm -imol all.pdb -itrj dcd_aligned.txt -otxt transition-ions.out 2> err-ions.out
+
+
 ##################
 ## TILTM2 UPPER ##
 ##################
@@ -58,7 +90,7 @@ fi
 
 
 ##################
-## TILTM2 DOWMER ##
+## TILTM2 LOWER ##
 ##################
 
 if [ "$1" == "tiltM2lower" ] || [ "$1" == "all" ] ; then
@@ -376,12 +408,13 @@ fi
 
 
 
-#######################
+##########
 ## HOLE ##
-#######################
+##########
 
 if  [ "$1" == "hole" ] ; then
   echo "## Computing hole  ##"
+  echo "## WARNING: you should use an aligned trajectory for this analysis"
 
   ${wordom} -iA ${wdmPath}/hole.wdm -imol all.pdb -itrj dcd_aligned.txt
 
@@ -434,8 +467,4 @@ fi
 if [ "$1" == "all" ] && [ $# == 1 ] ; then
 gnuplot plotAll.plt
 fi
-
-
-
-
 
