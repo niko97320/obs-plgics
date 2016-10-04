@@ -38,12 +38,13 @@ fi
 
 if [ "$1" == "propos" ] || [ "$1" == "all" ] ; then
   echo "## Computing P268's COM position ##"
+  echo "## WARNING: you should use an aligned trajectory for this analysis"
  # clean previous run
   if [ -f proxy*.out ] ; then
   rm proxy*.out
   fi
   for i in A B C D E ; do
-    ${wordom} -iA ${wdmPath}/proline-coord${i}.wdm -imol all.pdb -itrj dcd.txt -otxt proxy${i}.out
+    ${wordom} -iA ${wdmPath}/proline-coord${i}.wdm -imol all.pdb -itrj dcd_aligned.txt -otxt proxy${i}.out
   done
 fi
 
