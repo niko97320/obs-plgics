@@ -32,6 +32,21 @@ if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
 
 fi
 
+######################
+## Proline position ##
+######################
+
+if [ "$1" == "propos" ] || [ "$1" == "all" ] ; then
+  echo "## Computing P268's COM position ##"
+ # clean previous run
+  if [ -f proxy*.out ] ; then
+  rm proxy*.out
+  fi
+  for i in A B C D E ; do
+    ${wordom} -iA ${wdmPath}/proline-coord${i}.wdm -imol all.pdb -itrj dcd.txt -otxt proxy${i}.out
+  done
+fi
+
 
 ################
 ## M2-M3 dist ##
