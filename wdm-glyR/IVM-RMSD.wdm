@@ -1,0 +1,31 @@
+# wordom
+
+BEGIN rmsd
+--TITLE A
+--FIT	/@(A|B)/@(241-258|265-288|297-322)/CA
+--SELE	/AAA/@(503)/*
+END
+
+BEGIN rmsd
+--TITLE B
+--FIT   /@(B|C)/@(241-258|265-288|297-322)/CA
+--SELE	/BBB/@(503)/*
+END
+
+BEGIN rmsd
+--TITLE C
+--FIT   /@(C|D)/@(241-258|265-288|297-322)/CA
+--SELE  /CCC/@(503)/*
+END
+
+BEGIN rmsd
+--TITLE D
+--FIT   /@(D|E)/@(241-258|265-288|297-322)/CA
+--SELE  /DDD/@(503)/*
+END
+
+BEGIN rmsd
+--TITLE E
+--FIT   /@(E|A)/@(241-258|265-288|297-322)/CA
+--SELE  /EEE/@(401)/*
+END

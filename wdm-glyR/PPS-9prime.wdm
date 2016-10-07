@@ -1,0 +1,25 @@
+# wordom
+BEGIN distance
+--TITLE A
+--SELE /A/277/@(CA) :  /B/277/@(CA)
+END
+#
+BEGIN distance
+--TITLE B
+--SELE /B/277/@(CA) :  /C/277/@(CA)
+END
+#
+BEGIN distance
+--TITLE C
+--SELE /C/277/@(CA) :  /D/277/@(CA)
+END
+#
+BEGIN distance
+--TITLE D
+--SELE /D/277/@(CA) :  /E/277/@(CA)
+END
+#
+BEGIN distance
+--TITLE E
+--SELE /E/277/@(CA) :  /A/277/@(CA)
+END

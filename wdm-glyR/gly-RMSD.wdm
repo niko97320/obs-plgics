@@ -1,0 +1,31 @@
+# wordom
+
+BEGIN rmsd
+--TITLE A
+--FIT	/@(A|B)/@(54-60|78-84|142-147|165-174|225-233)/CA
+--SELE	/AA/@(367)/*
+END
+
+BEGIN rmsd
+--TITLE B
+--FIT   /@(B|C)/@(54-60|78-84|142-147|165-174|225-233)/CA
+--SELE	/BB/@(367)/*
+END
+
+BEGIN rmsd
+--TITLE C
+--FIT   /@(C|D)/@(54-60|78-84|142-147|165-174|225-233)/CA
+--SELE  /CC/@(367)/*
+END
+
+BEGIN rmsd
+--TITLE D
+--FIT   /@(D|E)/@(54-60|78-84|142-147|165-174|225-233)/CA
+--SELE  /DD/@(367)/*
+END
+
+BEGIN rmsd
+--TITLE E
+--FIT   /@(E|A)/@(54-60|78-84|142-147|165-174|225-233)/CA
+--SELE  /EE/@(367)/*
+END

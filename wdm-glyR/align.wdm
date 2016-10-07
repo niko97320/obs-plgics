@@ -1,0 +1,5 @@
+BEGIN rmsd
+--TITLE rmsd1
+--SELE /@(A|B|C|D|E)/*/CA
+--TRJOUT alignedFullTrj.dcd
+END

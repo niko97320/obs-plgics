@@ -1,0 +1,26 @@
+# wordom
+
+BEGIN distance
+--TITLE A 
+--SELE /AAA/503/O10 : /A/287/CZ
+END
+
+BEGIN distance
+--TITLE B
+--SELE /BBB/503/O10 : /B/287/CZ
+END
+
+BEGIN distance
+--TITLE C
+--SELE /CCC/503/O10 : /C/287/CZ
+END
+
+BEGIN distance
+--TITLE D
+--SELE /DDD/503/O10 : /D/287/CZ
+END
+
+BEGIN distance
+--TITLE E
+--SELE /EEE/401/O10 : /E/287/CZ
+END

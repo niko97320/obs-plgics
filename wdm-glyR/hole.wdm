@@ -1,0 +1,6 @@
+BEGIN HOLE
+--TITLE hole
+--POINT (0:0:0)
+--VECT (0:0:1)
+--SELE /@(A|B|C|D|E)//
+END

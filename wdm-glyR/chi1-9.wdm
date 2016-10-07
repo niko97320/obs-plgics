@@ -1,0 +1,25 @@
+BEGIN dihedral
+--TITLE chi1-L277-A
+--SELE /A/277/N : /A/277/CA : /A/277/CB : /A/277/CG
+END
+
+BEGIN dihedral
+--TITLE chi1-L277-B
+--SELE /B/277/N : /B/277/CA : /B/277/CB : /B/277/CG
+END
+
+BEGIN dihedral
+--TITLE chi1-L277-C
+--SELE /C/277/N : /C/277/CA : /C/277/CB : /C/277/CG
+END
+
+BEGIN dihedral
+--TITLE chi1-L277-D
+--SELE /D/277/N : /D/277/CA : /D/277/CB : /D/277/CG
+END
+
+BEGIN dihedral
+--TITLE chi1-L277-E
+--SELE /E/277/N : /E/277/CA : /E/277/CB : /E/277/CG
+END
+
