@@ -26,11 +26,62 @@ if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
   echo "Info: Check the code for further informations."
   echo "Info: Use the option -smooth to compute running averages of your data"
   # add end  and skip
-  echo "Info: To obtains statistics on your data use: all -stat beg (starting frame to analyze)"
+  echo "Info: To obtains statistics on your data use: -stat beg (starting frame to analyze) end (last frame to analyze)"
   echo "Info: type analyse.sh --help to read this again." 
   echo " "
 
 fi
+
+###########
+## STATS ##
+###########
+
+if [ "$1" == "-stat" ] ; then
+  if [ $# -lt 2 ]
+  then
+    echo "You must specify the starting frame"
+    echo "expl: ./analyses-obs -stat 1500"
+    exit 1
+  fi
+  if [ $# -gt 3 ]
+  then
+    echo "You must specify the starting frame and possibly the last frame"
+    echo "expl: ./analyses-obs -stat 1500 2500"
+    exit 1
+  fi
+  if [ $# == 2 ]
+  then
+    echo "Analysis will be done from the frame $2 to the end."
+  else
+    echo "Analysis will be done from the frame $2 to the frame $3."
+  fi
+
+  echo "==============================="
+  echo "Tilt M2 pol:"
+  ./avg_analyses.py tiltM2_avg.out 0 $2 $3
+  echo "==============================="
+  echo "Tilt M2 az:"
+  ./avg_analyses.py tiltM2_avg.out 1 $2 $3
+  echo "==============================="
+  echo "Tilt B pol:"
+  ./avg_analyses.py tiltB_avg.out 0 $2 $3
+  echo "==============================="
+  echo "Tilt B az:"
+  ./avg_analyses.py tiltB_avg.out 1 $2 $3
+  echo "==============================="
+   echo "Twist:"
+  ./avg_analyses.py twist_avg.out 0 $2 $3
+  echo "==============================="
+  echo "PPS 9':"
+  ./avg_analyses.py PPS-surf-9prime.out 0 $2 $3
+  echo "==============================="
+  echo "PPS -2':"
+  ./avg_analyses.py PPS-surf-2prime.out 0 $2 $3
+  echo "==============================="
+  exit 0
+fi
+
+
 
 ######################
 ## Proline position ##
@@ -450,42 +501,6 @@ if  [ "$1" == "hole" ] ; then
 
   ${wordom} -iA ${wdmPath}/hole.wdm -imol all.pdb -itrj dcd_aligned.txt
 
-fi
-
-###########
-## STATS ##
-###########
-
-if [ "$1" == "all" ] && [ "$2" == "-stat" ] ; then
-  if [ $# -lt 3 ]
-  then
-    echo "You must specify the starting frame"
-    echo "expl: ./analyses all -stat 1500"
-    exit 1
-  fi
-  echo "==============================="
-  echo "Tilt M2 pol:"
-  ./avg_analyses.py tiltM2_avg.out 0 $3
-  echo "==============================="
-  echo "Tilt M2 az:"
-  ./avg_analyses.py tiltM2_avg.out 1 $3
-  echo "==============================="
-  echo "Tilt B pol:"
-  ./avg_analyses.py tiltB_avg.out 0 $3
-  echo "==============================="
-  echo "Tilt B az:"
-  ./avg_analyses.py tiltB_avg.out 1 $3
-  echo "==============================="
-   echo "Twist:"
-  ./avg_analyses.py twist_avg.out 0 $3
-  echo "==============================="
-  echo "PPS 9':"
-  ./avg_analyses.py PPS-surf-9prime.out 0 $3
-  echo "==============================="
-  echo "PPS -2':"
-  ./avg_analyses.py PPS-surf-2prime.out 0 $3
-  echo "==============================="
-  exit 0
 fi
 
 
