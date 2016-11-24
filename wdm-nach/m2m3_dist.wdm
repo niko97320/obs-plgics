@@ -1,0 +1,26 @@
+# wordom
+
+BEGIN distance
+--TITLE A
+--SELE //A/@(258-265)/@(CA|C|N) : //A/@(274-280)/@(CA|C|N)
+END
+
+BEGIN distance
+--TITLE B
+--SELE //B/@(258-265)/@(CA|C|N) : //B/@(274-280)/@(CA|C|N)
+END
+
+BEGIN distance
+--TITLE C
+--SELE //C/@(258-265)/@(CA|C|N) : //C/@(274-280)/@(CA|C|N)
+END
+
+BEGIN distance
+--TITLE D
+--SELE //D/@(258-265)/@(CA|C|N) : //D/@(274-280)/@(CA|C|N)
+END
+
+BEGIN distance
+--TITLE E
+--SELE //E/@(258-265)/@(CA|C|N) : //E/@(274-280)/@(CA|C|N)
+END
