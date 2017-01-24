@@ -36,22 +36,23 @@ fi
 ## TESTS ##
 ###########
 
-if [-f dcd_prot.txt ] : 
+if [-f dcd_prot.txt ] ; then
   echo "List of trajectories for the protein only, aligned found"
   echo "Will be used for the following analysis :"
   echo "Twist, tiltM2, Proline position, tiltB, HOLE, DVP, PPS,Chi ..."
-else :
+else 
   echo " Warning: List of trajectories for the protein only, aligned NOT found"
   echo "Make sure your analsyis is alright"
+fi
   
-if [-f dcd_wrapped.txt ] : 
+if [-f dcd_wrapped.txt ] ; then
   echo "List of trajectories for the full system wrapped and aligned found"
   echo "Will be used for the following analysis :"
   echo "Flux"
-else :
+else 
   echo " Warning: List of trajectories for the protein only, aligned NOT found"
   echo "Make sure your analsyis is alright"
-  
+fi
   
 ###########
 ## STATS ##
