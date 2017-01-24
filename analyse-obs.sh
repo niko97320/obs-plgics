@@ -33,6 +33,27 @@ if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
 fi
 
 ###########
+## TESTS ##
+###########
+
+if [-f dcd_prot.txt ] : 
+  echo "List of trajectories for the protein only, aligned found"
+  echo "Will be used for the following analysis :"
+  echo "Twist, tiltM2, Proline position, tiltB, HOLE, DVP, PPS,Chi ..."
+else :
+  echo " Warning: List of trajectories for the protein only, aligned NOT found"
+  echo "Make sure your analsyis is alright"
+  
+if [-f dcd_wrapped.txt ] : 
+  echo "List of trajectories for the full system wrapped and aligned found"
+  echo "Will be used for the following analysis :"
+  echo "Flux"
+else :
+  echo " Warning: List of trajectories for the protein only, aligned NOT found"
+  echo "Make sure your analsyis is alright"
+  
+  
+###########
 ## STATS ##
 ###########
 
