@@ -1,0 +1,27 @@
+# system to analyse
+SYS glucl
+#SYS glyR
+
+#SYS nach 
+# smoothing function / running average
+SMOOTH ON
+FREQ 50
+# write here all the analysis that you want to exectue
+propos
+tiltM2
+IVM
+m2m3
+#flux
+tiltM2upper
+tiltM2lower
+tiltM2
+tiltB
+twist
+DVP
+GLU
+#IVMHB
+PPS13
+PPS9
+#PPS2
+#chi1
+#hole
