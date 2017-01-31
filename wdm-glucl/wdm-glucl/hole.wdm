@@ -1,0 +1,6 @@
+BEGIN HOLE
+--TITLE 3rif-IVM 
+--POINT (0:0:-22.8) # center of resid 254 and protein
+--VECT (0:0:1)
+--SELE /@(A|B|C|D|E)//
+END
