@@ -277,20 +277,20 @@ fi
 if [ $tiltM2upper == 1 ] ; then
   echo "## Computing TILTM2 upper##"
  # clean previous run
-  if [ -f tiltM2upper.out ] ; then
-    rm -f tiltM2upper.out
+  if [ -f tiltM2-upper.out ] ; then
+    rm -f tiltM2-upper.out
   fi
 
-  ${wordom} -iA ${wdmPath}/tiltM2-upper.wdm -imol $pdb -itrj $dcd_prot >> tiltM2upper.out
+  ${wordom} -iA ${wdmPath}/tiltM2-upper.wdm -imol $pdb -itrj $dcd_prot >> tiltM2-upper.out
 
   # compute average over the 5 subunits
-  rm -f tiltM2upper_avg.out
-  grep -v "#" tiltM2upper.out | awk '{sumt=0;sump=0 ; sumt += $2+$4+$6+$8+$10 ; sump += $3+$5+$7+$9+$11; print sumt/5"\t"sump/5}' > tiltM2upper_avg.out
+  rm -f tiltM2-upper_avg.out
+  grep -v "#" tiltM2-upper.out | awk '{sumt=0;sump=0 ; sumt += $2+$4+$6+$8+$10 ; sump += $3+$5+$7+$9+$11; print sumt/5"\t"sump/5}' > tiltM2-upper_avg.out
 
   # compute the Smoothen curve 
   if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
-  grep -v "#" tiltM2upper_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t%s\n", "#nFr","Theta","Phi"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\t%s\n", line, sum1/avg, sum2/avg ; sum1=0 ; sum2=0; line=line+avg;}' > tiltM2upper_avg_smooth.out
+  grep -v "#" tiltM2-upper_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t%s\n", "#nFr","Theta","Phi"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\t%s\n", line, sum1/avg, sum2/avg ; sum1=0 ; sum2=0; line=line+avg;}' > tiltM2-upper_avg_smooth.out
   fi
 fi
 
@@ -302,8 +302,8 @@ fi
 if [ $tiltM2lower == 1 ] ; then
   echo "## Computing TILTM2 lower ##"
  # clean previous run
-  if [ -f tiltM2lower.out ] ; then
-    rm -f tiltM2lower.out
+  if [ -f tiltM2-lower.out ] ; then
+    rm -f tiltM2-lower.out
   fi
 
   ${wordom} -iA ${wdmPath}/tiltM2-lower.wdm -imol $pdb -itrj $dcd_prot >> tiltM2-lower.out
