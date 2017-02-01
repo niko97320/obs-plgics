@@ -1,0 +1,25 @@
+BEGIN dihedral
+--TITLE chi1-T281-A
+--SELE /A/281/N : /A/281/CA : /A/281/CB : /A/281/OG1
+END
+
+BEGIN dihedral
+--TITLE chi1-T281-B
+--SELE /B/281/N : /B/281/CA : /B/281/CB : /B/281/OG1
+END
+
+BEGIN dihedral
+--TITLE chi1-T281-C
+--SELE /C/281/N : /C/281/CA : /C/281/CB : /C/281/OG1
+END
+
+BEGIN dihedral
+--TITLE chi1-T281-D
+--SELE /D/281/N : /D/281/CA : /D/281/CB : /D/281/OG1
+END
+
+BEGIN dihedral
+--TITLE chi1-T281-E
+--SELE /E/281/N : /E/281/CA : /E/281/CB : /E/281/OG1
+END
+

@@ -1,0 +1,25 @@
+BEGIN dihedral
+--TITLE chi1-L254-A
+--SELE /A/254/N : /A/254/CA : /A/254/CB : /A/254/CG
+END
+
+BEGIN dihedral
+--TITLE chi1-L254-B
+--SELE /B/254/N : /B/254/CA : /B/254/CB : /B/254/CG
+END
+
+BEGIN dihedral
+--TITLE chi1-L254-C
+--SELE /C/254/N : /C/254/CA : /C/254/CB : /C/254/CG
+END
+
+BEGIN dihedral
+--TITLE chi1-L254-D
+--SELE /D/254/N : /D/254/CA : /D/254/CB : /D/254/CG
+END
+
+BEGIN dihedral
+--TITLE chi1-L254-E
+--SELE /E/254/N : /E/254/CA : /E/254/CB : /E/254/CG
+END
+
