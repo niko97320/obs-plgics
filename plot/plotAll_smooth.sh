@@ -152,7 +152,7 @@ set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
 set output 'dvp_avg_smooth.png'
 set xlabel 'Frame' 
 set ylabel '<DVP\_avg>' 
-plot "DVP_avg_smooth.out w l
+plot "DVP_avg_smooth.out" w l
 EOF
 fi
 
