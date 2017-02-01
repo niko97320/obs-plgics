@@ -8,7 +8,7 @@ SMOOTH ON
 FREQ 50
 # write here all the analysis that you want to exectue
 propos
-tiltM2
+tiltM2full
 IVM
 m2m3
 #flux
