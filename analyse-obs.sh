@@ -36,12 +36,12 @@ inp="inp-analyse.txt"
 ## Parse list of anaylsis requiered by user ##
 ##############################################
 
-tiltM2=0
 IVM=0
 im2m3=0
 flux=0
 tiltM2upper=0
 tiltM2lower=0
+tiltM2full=0
 tiltB=0
 twist=0
 DVP=0
@@ -81,8 +81,8 @@ do
         smooth=1
         echo "SMOOTH is :" $smooth
       fi 
-    elif [[ $(echo $line | awk '{print $1}') == "tiltM2" ]] ; then
-      tiltM2=1
+    elif [[ $(echo $line | awk '{print $1}') == "tiltM2full" ]] ; then
+      tiltM2full=1
     elif [[ $(echo $line | awk '{print $1}') == "IVM" ]] ; then
       IVM=1
     elif [[ $(echo $line | awk '{print $1}') == "propos" ]] ; then
@@ -300,52 +300,52 @@ fi
 ##################
 
 if [ $tiltM2lower == 1 ] ; then
-  echo "## Computing TILTM2 lower##"
+  echo "## Computing TILTM2 lower ##"
  # clean previous run
   if [ -f tiltM2lower.out ] ; then
     rm -f tiltM2lower.out
   fi
 
-  ${wordom} -iA ${wdmPath}/tiltM2lower.wdm -imol $pdb -itrj $dcd_prot >> tiltM2lower.out
+  ${wordom} -iA ${wdmPath}/tiltM2-lower.wdm -imol $pdb -itrj $dcd_prot >> tiltM2-lower.out
 
   # compute average over the 5 subunits
-  rm -f tiltM2lower_avg.out
-  grep -v "#" tiltM2lower.out | awk '{sumt=0;sump=0 ; sumt += $2+$4+$6+$8+$10 ; sump += $3+$5+$7+$9+$11; print sumt/5"\t"sump/5}' > tiltM2lower_avg.out
+  rm -f tiltM2-lower_avg.out
+  grep -v "#" tiltM2-lower.out | awk '{sumt=0;sump=0 ; sumt += $2+$4+$6+$8+$10 ; sump += $3+$5+$7+$9+$11; print sumt/5"\t"sump/5}' > tiltM2-lower_avg.out
 
   # compute the Smoothen curve 
   if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
-  grep -v "#" tiltM2lower_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t%s\n", "#nFr","Theta","Phi"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\t%s\n", line, sum1/avg, sum2/avg ; sum1=0 ; sum2=0; line=line+avg;}' > tiltM2lower_avg_smooth.out
+  grep -v "#" tiltM2-lower_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t%s\n", "#nFr","Theta","Phi"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\t%s\n", line, sum1/avg, sum2/avg ; sum1=0 ; sum2=0; line=line+avg;}' > tiltM2-lower_avg_smooth.out
   fi
 fi
 
-############
-## TILTM2 ##
-############
+#################
+## TILTM2 FULL ##
+#################
 
-if [ $tiltM2 == 1 ] ; then
-  echo "## Computing TILTM2 ##"
+if [ $tiltM2full == 1 ] ; then
+  echo "## Computing TILTM2 full helix ##"
  # clean previous run
-  if [ -f tiltM2.out ] ; then
-    rm -f tiltM2.out
+  if [ -f tiltM2-full.out ] ; then
+    rm -f tiltM2-full.out
   fi
 
-  ${wordom} -iA ${wdmPath}/tiltM2.wdm -imol $pdb -itrj $dcd_prot >> tiltM2.out
+  ${wordom} -iA ${wdmPath}/tiltM2-full.wdm -imol $pdb -itrj $dcd_prot >> tiltM2-full.out
 
 
    if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
-  grep -v "#" tiltM2.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "#nFr","AT","AP","BT","BP","CT", "CP", "DT", "DP", "ET", "ED"}{sum1+=$2;sum2+=$3;sum3+=$4;sum4+=$5;sum5+=$6;sum6+=$7;sum7+=$8;sum8+=$9;sum9+=$10; sum10+=$11} (NR%avg)==0{printf " %i\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\n", line, sum1/avg, sum2/avg, sum3/avg, sum4/avg, sum5/avg, sum6/avg, sum7/avg, sum8/avg, sum9/avg, sum10/avg ; sum1=0 ;  sum2=0; sum3=0; sum4=0; sum5=0; sum6=0 ;  sum7=0; sum8=0; sum9=0; sum10=0; line=line+avg;}' > tiltM2_smooth.out
+  grep -v "#" tiltM2-full.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "#nFr","AT","AP","BT","BP","CT", "CP", "DT", "DP", "ET", "ED"}{sum1+=$2;sum2+=$3;sum3+=$4;sum4+=$5;sum5+=$6;sum6+=$7;sum7+=$8;sum8+=$9;sum9+=$10; sum10+=$11} (NR%avg)==0{printf " %i\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\n", line, sum1/avg, sum2/avg, sum3/avg, sum4/avg, sum5/avg, sum6/avg, sum7/avg, sum8/avg, sum9/avg, sum10/avg ; sum1=0 ;  sum2=0; sum3=0; sum4=0; sum5=0; sum6=0 ;  sum7=0; sum8=0; sum9=0; sum10=0; line=line+avg;}' > tiltM2-full_smooth.out
   fi
 
 
   # compute average over the 5 subunits
-  rm -f tiltM2_avg.out
-  grep -v "#" tiltM2.out | awk '{sumt=0;sump=0 ; sumt += $2+$4+$6+$8+$10 ; sump += $3+$5+$7+$9+$11; print sumt/5"\t"sump/5}' > tiltM2_avg.out
+  rm -f tiltM2-full_avg.out
+  grep -v "#" tiltM2-full.out | awk '{sumt=0;sump=0 ; sumt += $2+$4+$6+$8+$10 ; sump += $3+$5+$7+$9+$11; print sumt/5"\t"sump/5}' > tiltM2-full_avg.out
   # compute the Smoothen curve for AVG
   if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
-  grep -v "#" tiltM2_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t%s\n", "#nFr","Theta","Phi"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\t%s\n", line, sum1/avg, sum2/avg ; sum1=0 ; sum2=0; line=line+avg;}' > tiltM2_avg_smooth.out
+  grep -v "#" tiltM2-full_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t%s\n", "#nFr","Theta","Phi"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\t%s\n", line, sum1/avg, sum2/avg ; sum1=0 ; sum2=0; line=line+avg;}' > tiltM2-full_avg_smooth.out
   fi
 fi
 
