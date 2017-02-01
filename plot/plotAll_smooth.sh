@@ -160,7 +160,6 @@ if [ -f tiltB_smooth.out ] ; then
   gnuplot << EOF
 set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
 set output 'tiltB_pol_smooth.png'
-#set title 'tiltM2 Pol'
 set xlabel 'Frame' 
 set ylabel '<titlB pol>' 
 plot "tiltB_smooth.out" u 1:2 w l t "A pol" lc 3,"tiltB_smooth.out" u 1:4 w l t "B pol" lc 1, "tiltB_smooth.out" u 1:6 w l t "C pol" lc 7, "tiltB_smooth.out" u 1:8 w l t "D pol" lc 8, "tiltB_smooth.out" u 1:10 w l t "E pol" lc 6
