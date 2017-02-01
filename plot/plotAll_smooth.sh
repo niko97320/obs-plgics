@@ -35,6 +35,17 @@ plot "GLY_smooth.out" u 1:2 w l t "A" lc 3, "GLY_smooth.out" u 1:3 w l t "B" lc 
 EOF
 fi
 
+if [ -f GLU_smooth.out ] ; then 
+  gnuplot << EOF
+set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
+set output 'RMSD-GLU_smooth.png'
+#set title 'RMSD-GLU'
+set xlabel 'Frame' 
+set ylabel '<Glutamate RMSD>' 
+plot "GLU_smooth.out" u 1:2 w l t "A" lc 3, "GLU_smooth.out" u 1:3 w l t "B" lc 1, "GLU_smooth.out" u 1:4 w l t "C" lc 7, "GLU_smooth.out" u 1:5 w l t "D" lc 8, "GLU_smooth.out" u 1:6 w l t "E" lc 6
+EOF
+fi
+
 if [ -f DTP_smooth.out ] ; then 
   gnuplot << EOF
 set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
