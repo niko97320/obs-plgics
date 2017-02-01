@@ -1,9 +1,0 @@
-BEGIN flux 
---TITLE water
---SELE /*/*/OH2 
---LOWER -37.72 # center of resid 244
---UPPER 7.54 # center of resid 42
---DELTA 5.0
---RCUT 15.0
-END
-
