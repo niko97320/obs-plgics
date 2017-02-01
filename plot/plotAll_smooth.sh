@@ -131,7 +131,7 @@ set output 'tiltB_avg_smooth.png'
 #set title 'tiltB\_avg'
 set xlabel 'Frame' 
 set ylabel '<titlB\_avg>' 
-plot "tiltB_avg_smooth.out" u 1 w l t "Pol","tiltB_avg_smooth.out"  u 2 w l t "Az"
+plot "tiltB_avg_smooth.out" u 2 w l t "Pol","tiltB_avg_smooth.out"  u 3 w l t "Az"
 EOF
 fi
 
