@@ -97,7 +97,7 @@ set output 'tiltM2-lower_avg_smooth.png'
 #set title 'tiltM2\_avg'
 set xlabel 'Frame' 
 set ylabel '<titlM2-lower\_avg>' 
-plot "tiltM2-lower_avg_smooth.out" u 1 w l t "Pol","tiltM2-lower_avg_smooth.out"  u 2 w l t "Az"
+plot "tiltM2-lower_avg_smooth.out" u 2 w l t "Pol","tiltM2-lower_avg_smooth.out"  u 3 w l t "Az"
 EOF
 fi
 
@@ -108,7 +108,7 @@ set output 'tiltM2-upper_avg_smooth.png'
 #set title 'tiltM2\_avg'
 set xlabel 'Frame' 
 set ylabel '<titlM2-upper\_avg>' 
-plot "tiltM2-upper_avg_smooth.out" u 1 w l t "Pol","tiltM2-upper_avg_smooth.out"  u 2 w l t "Az"
+plot "tiltM2-upper_avg_smooth.out" u 2 w l t "Pol","tiltM2-upper_avg_smooth.out"  u 3 w l t "Az"
 EOF
 fi
 
@@ -120,7 +120,7 @@ set output 'tiltM2-full_avg_smooth.png'
 #set title 'tiltM2\_avg'
 set xlabel 'Frame' 
 set ylabel '<titlM2-full\_avg>' 
-plot "tiltM2-full_avg_smooth.out" u 1 w l t "Pol","tiltM2-full_avg_smooth.out"  u 2 w l t "Az"
+plot "tiltM2-full_avg_smooth.out" u 2 w l t "Pol","tiltM2-full_avg_smooth.out"  u 3 w l t "Az"
 EOF
 fi
 
@@ -159,7 +159,7 @@ fi
 if [ -f tiltB_smooth.out ] ; then 
   gnuplot << EOF
 set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
-set output 'tiltM2_pol_smooth.png'
+set output 'tiltB_pol_smooth.png'
 #set title 'tiltM2 Pol'
 set xlabel 'Frame' 
 set ylabel '<titlB pol>' 
