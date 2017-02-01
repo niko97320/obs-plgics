@@ -82,8 +82,6 @@ fi
 if [ -f tiltM2_smooth.out ] ; then 
   gnuplot << EOF
 set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
-set xlabel 'Frame' 
-set ylabel 'Pore surface' 
 set output 'tiltM2_pol_smooth.png'
 #set title 'tiltM2 Pol'
 set xlabel 'Frame' 
@@ -114,6 +112,17 @@ plot "tiltM2_avg_smooth.out" u 1 w l t "Pol","tiltM2_avg_smooth.out"  u 2 w l t 
 EOF
 fi
 
+if [ -f tiltB_avg_smooth.out ] ; then 
+  gnuplot << EOF
+set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
+set output 'tiltB_avg_smooth.png'
+#set title 'tiltB\_avg'
+set xlabel 'Frame' 
+set ylabel '<titlB\_avg>' 
+plot "tiltB_avg_smooth.out" u 1 w l t "Pol","tiltB_avg_smooth.out"  u 2 w l t "Az"
+EOF
+fi
+
 if [ -f twist_avg_smooth.out ] ; then 
   gnuplot << EOF
 set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
@@ -124,4 +133,42 @@ set ylabel '<twist\_avg>'
 plot "twist_avg_smooth.out" w l
 EOF
 fi
+
+if [ -f DVP_avg_smooth.out ] ; then 
+  gnuplot << EOF
+set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
+set output 'dvp_avg_smooth.png'
+set xlabel 'Frame' 
+set ylabel '<DVP\_avg>' 
+plot "DVP_avg_smooth.out w l
+EOF
+fi
+
+if [ -f tiltB_smooth.out ] ; then 
+  gnuplot << EOF
+set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
+set output 'tiltM2_pol_smooth.png'
+#set title 'tiltM2 Pol'
+set xlabel 'Frame' 
+set ylabel '<titlB pol>' 
+plot "tiltB_smooth.out" u 1:2 w l t "A pol" lc 3,"tiltB_smooth.out" u 1:4 w l t "B pol" lc 1, "tiltB_smooth.out" u 1:6 w l t "C pol" lc 7, "tiltB_smooth.out" u 1:8 w l t "D pol" lc 8, "tiltB_smooth.out" u 1:10 w l t "E pol" lc 6
+EOF
+fi
+
+if [ -f tiltB_smooth.out ] ; then 
+  gnuplot << EOF
+set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
+set output 'tiltM2_az_smooth.png'
+#set title 'tiltM2 Az'
+set xlabel 'Frame' 
+set ylabel '<titlB az>' 
+plot "tiltB_smooth.out" u 1:3 w l t "A az" lc 3, "tiltB_smooth.out" u 1:5 w l t "B az" lc 1 , "tiltB_smooth.out" u 1:7 w l t "C az" lc 7,"tiltB_smooth.out" u 1:9 w l t "D az" lc 8, "tiltB_smooth.out" u 1:11 w l t "E az" lc 6
+EOF
+fi
+
+
+
+
+
+
 
