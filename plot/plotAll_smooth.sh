@@ -79,17 +79,6 @@ plot "PPS-surf-2prime_smooth.out" w l
 EOF
 fi
 
-if [ -f tiltM2_smooth.out ] ; then 
-  gnuplot << EOF
-set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
-set output 'tiltM2_pol_smooth.png'
-#set title 'tiltM2 Pol'
-set xlabel 'Frame' 
-set ylabel '<titlM2 pol>' 
-plot "tiltM2_smooth.out" u 1:2 w l t "A pol" lc 3,"tiltM2_smooth.out" u 1:4 w l t "B pol" lc 1, "tiltM2_smooth.out" u 1:6 w l t "C pol" lc 7, "tiltM2_smooth.out" u 1:8 w l t "D pol" lc 8, "tiltM2_smooth.out" u 1:10 w l t "E pol" lc 6
-EOF
-fi
-
 if [ -f tiltM2-lower_avg_smooth.out ] ; then 
   gnuplot << EOF
 set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
