@@ -10,8 +10,6 @@
 
 # specifiy the path (if not in $PATH) and name of the executable
 wordom="wordom"
-# specifiy path for wdm analysis files
-#wdmPath="obs-plgics/wdm-glucl"
 # Specify the size of the bins for the running average
 inp="inp-analyse.txt" 
 
@@ -22,7 +20,7 @@ inp="inp-analyse.txt"
 #  echo " " 
 #  echo "Info: Argument missing : You may use this script with analyse.sh arg1 -misc arg2"
 #  echo "Info: Possible observables to analyze are :"
-#  echo "Info: tiltM2, tiltB, twist, DVP, PPS, GLU, hole, all"
+#  echo "Info: tiltM2, tiltB, twist, DVP, PPS, LIG, hole, all"
 #  echo "Info: Check the code for further informations."
 #  echo "Info: Use the option -smooth to compute running averages of your data"
 #  # add end  and skip
@@ -37,15 +35,15 @@ inp="inp-analyse.txt"
 ##############################################
 
 IVM=0
-im2m3=0
+m2m3=0
 flux=0
 tiltM2upper=0
 tiltM2lower=0
 tiltM2full=0
 tiltB=0
 twist=0
-DVP=0
-GLU=0
+m2m3_b1b2=0
+LIG=0
 IVMHB=0
 PPS13=0
 PPS9=0
@@ -55,6 +53,7 @@ hole=0
 propos=0
 smooth=0
 avg=500
+analysis_list=()
 
 while read -r line
 do
@@ -66,13 +65,17 @@ do
   else 
     if [[ $(echo $line | awk '{print $1}') == "SYS" ]] ; then
       system=$(echo $line | awk '{print $2}')
-      if [ $system == "glucl" ] ; then 
+      if [[ $system == "glucl" ]] ; then 
         wdmPath="obs-plgics/wdm-glucl"
-      elif [ $sytem == "glyR" ] ; then
+      elif [[ $system == "glyR" ]] ; then
         wdmPath="obs-plgics/wdm-glyR"
-      elif [ $sytem == "nach" ] ; then
+      elif [[ $system == "nach" ]] ; then
         wdmPath="obs-plgics/wdm-nach"
+      else
+        echo "SYStem not understood"
+	exit
       fi
+    echo "System is :" $system
     elif [[ $(echo $line | awk '{print $1}') == "FREQ" ]] ; then
      avg=$(echo $line | awk '{print $2}')
      echo "average is :"$avg
@@ -83,46 +86,64 @@ do
       fi 
     elif [[ $(echo $line | awk '{print $1}') == "tiltM2full" ]] ; then
       tiltM2full=1
+      analysis_list+="tiltM2full " 
     elif [[ $(echo $line | awk '{print $1}') == "IVM" ]] ; then
       IVM=1
+      analysis_list+="IVM " 
     elif [[ $(echo $line | awk '{print $1}') == "propos" ]] ; then
       propos=1
+      analysis_list+="propos " 
     elif [[ $(echo $line | awk '{print $1}') == "m2m3" ]] ; then
-      im2m3=1
+      m2m3=1
+      analysis_list+="m2m3 " 
     elif [[ $(echo $line | awk '{print $1}') == "flux" ]] ; then
       flux=1
+      analysis_list+="flux " 
     elif [[ $(echo $line | awk '{print $1}') == "tiltM2upper" ]] ; then
       tiltM2upper=1
+      analysis_list+="tiltM2upper " 
     elif [[ $(echo $line | awk '{print $1}') == "tiltM2lower" ]] ; then
       tiltM2lower=1
+      analysis_list+="tiltM2lower " 
     elif [[ $(echo $line | awk '{print $1}') == "tiltB" ]] ; then
       tiltB=1
+      analysis_list+="tiltB " 
     elif [[ $(echo $line | awk '{print $1}') == "twist" ]] ; then
       twist=1
-      echo "Twist" 
-    elif [[ $(echo $line | awk '{print $1}') == "DVP" ]] ; then
-      DVP=1
-      echo "DVP" 
-    elif [[ $(echo $line | awk '{print $1}') == "GLU" ]] ; then
-      GLU=1
+      analysis_list+="twist " 
+    elif [[ $(echo $line | awk '{print $1}') == "m2m3_b1b2" ]] ; then
+      m2m3_b1b2=1
+      analysis_list+="m2m3_b1b2 " 
+    elif [[ $(echo $line | awk '{print $1}') == "LIG" ]] ; then
+      LIG=1
+      analysis_list+="LIG " 
     elif [[ $(echo $line | awk '{print $1}') == "IVMHB" ]] ; then
       IVMHB=1
+      analysis_list+="IVMHB " 
     elif [[ $(echo $line | awk '{print $1}') == "PPS13" ]] ; then
       PPS13=1
+      analysis_list+="PPS13 " 
     elif [[ $(echo $line | awk '{print $1}') == "PPS9" ]] ; then
       PPS9=1
+      analysis_list+="PPS9 " 
     elif [[ $(echo $line | awk '{print $1}') == "PPS2" ]] ; then
       PPS2=1
+      analysis_list+="PPS2 " 
     elif [[ $(echo $line | awk '{print $1}') == "chi1" ]] ; then
       chi1=1
+      analysis_list+="chi1 " 
     elif [[ $(echo $line | awk '{print $1}') == "hole" ]] ; then
       hole=1
+      analysis_list+="hole " 
     else 
       echo "$line: not understood!"
       #exit 1
     fi
   fi
 done < "$inp"
+
+
+echo "Analysis will be run for :" $analysis_list
 
 ########################
 ## TESTS ON DCD files ##
@@ -400,50 +421,50 @@ if  [ $twist == 1 ] ; then
   fi
 fi
 
-#######################
-## DISTANCE V45-P268 ##
-#######################
+##################################
+## DISTANCE V45-P268  m2m3_b1b2 ##
+#################################
 
-if  [ $DVP == 1 ] ; then
-  echo "## Computing DVP  ##"
+if  [ $m2m3_b1b2 == 1 ] ; then
+  echo "## Computing m2m3_b1b2 (DVP)  ##"
   # clean previous run
-  if [ -f DVP.out ] ; then
-    rm -f DVP.out
+  if [ -f m2m3_b1b2.out ] ; then
+    rm -f m2m3_b1b2.out
   fi
 
-  ${wordom} -iA ${wdmPath}/dist-V45-P268.wdm -imol $pdb -itrj $dcd_prot >> DVP.out
+  ${wordom} -iA ${wdmPath}/m2m3_b1b2.wdm -imol $pdb -itrj $dcd_prot >> m2m3_b1b2.out
 
   # compute average over the 5 subunits
-  rm -f DVP_avg.out
-  grep -v "#" DVP.out | awk '{sum=0 ; sum += $2+$3+$4+$5+$6; print sum/5}' > DVP_avg.out
+  rm -f m2m3_b1b2_avg.out
+  grep -v "#" m2m3_b1b2.out | awk '{sum=0 ; sum += $2+$3+$4+$5+$6; print sum/5}' > m2m3_b1b2_avg.out
 
   if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
-  grep -v "#" DVP.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "#nFr","A","B","C","D","E"}{sum1+=$2;;sum2+=$3;sum3+=$4;sum4+=$5;sum5+=$6} (NR%avg)==0{printf " %i\t%f\t%f\t%f\t%f\t%f\n", line, sum1/avg, sum2/avg , sum3/avg, sum4/avg, sum5/avg ; sum1=0 ;  sum2=0; sum3=0; sum4=0; sum5=0; line=line+avg;}' > DVP_smooth.out
+  grep -v "#" m2m3_b1b2.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "#nFr","A","B","C","D","E"}{sum1+=$2;;sum2+=$3;sum3+=$4;sum4+=$5;sum5+=$6} (NR%avg)==0{printf " %i\t%f\t%f\t%f\t%f\t%f\n", line, sum1/avg, sum2/avg , sum3/avg, sum4/avg, sum5/avg ; sum1=0 ;  sum2=0; sum3=0; sum4=0; sum5=0; line=line+avg;}' > m2m3_b1b2_smooth.out
   fi
 
 if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
-  grep -v "#" DVP_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\n", "#nFr","DVP"}{sum+=$1} (NR%avg)==0{printf " %i\t%f\t\n", line, sum/avg ; sum=0 ; line=line+avg;}' > DVP_avg_smooth.out
+  grep -v "#" m2m3_b1b2_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\n", "#nFr","DVP"}{sum+=$1} (NR%avg)==0{printf " %i\t%f\t\n", line, sum/avg ; sum=0 ; line=line+avg;}' > m2m3_b1b2_avg_smooth.out
 fi
 fi
 
 ##############
-## Glu RMSD ##
+## LIG RMSD ##
 ##############
 
-if  [ $GLU == 1 ] ; then
-  echo "## Computing GLU RMDS  ##"
+if  [ $LIG == 1 ] ; then
+  echo "## Computing LIG RMDS  ##"
   # clean previous run
-  if [ -f GLU.out ] ; then
-    rm -f GLU.out
+  if [ -f LIG.out ] ; then
+    rm -f LIG.out
   fi
 
-  ${wordom} -iA ${wdmPath}/glu-RMSD.wdm -imol $pdb -itrj $dcd_prot >> GLU.out
+  ${wordom} -iA ${wdmPath}/LIG-RMSD.wdm -imol $pdb -itrj $dcd_prot >> LIG.out
 
   if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
-  grep -v "#" GLU.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "#nFr","A","B","C","D","E"}{sum1+=$2;;sum2+=$3;sum3+=$4;sum4+=$5;sum5+=$6} (NR%avg)==0{printf " %i\t%f\t%f\t%f\t%f\t%f\n", line, sum1/avg, sum2/avg, sum3/avg, sum4/avg, sum5/avg ; sum1=0 ;  sum2=0; sum3=0; sum4=0; sum5=0; line=line+avg;}' > GLU_smooth.out
+  grep -v "#" LIG.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "#nFr","A","B","C","D","E"}{sum1+=$2;;sum2+=$3;sum3+=$4;sum4+=$5;sum5+=$6} (NR%avg)==0{printf " %i\t%f\t%f\t%f\t%f\t%f\n", line, sum1/avg, sum2/avg, sum3/avg, sum4/avg, sum5/avg ; sum1=0 ;  sum2=0; sum3=0; sum4=0; sum5=0; line=line+avg;}' > LIG_smooth.out
   fi
 fi
 
@@ -460,7 +481,7 @@ if  [ $IVM == 1 ] ; then
 
   ${wordom} -iA ${wdmPath}/IVM-RMSD.wdm -imol $pdb -itrj $dcd_prot >> IVM.out
 
-  if [ "$2" == "-smooth" ] ; then
+  if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
   grep -v "#" IVM.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "#nFr","A","B","C","D","E"}{sum1+=$2;;sum2+=$3;sum3+=$4;sum4+=$5;sum5+=$6} (NR%avg)==0{printf " %i\t%f\t%f\t%f\t%f\t%f\n", line, sum1/avg, sum2/avg, sum3/avg, sum4/avg, sum5/avg ; sum1=0 ;  sum2=0; sum3=0; sum4=0; sum5=0; line=line+avg;}' > IVM_smooth.out
   fi
@@ -574,7 +595,7 @@ if [ $chi1 == 1 ] ; then
   grep -v "#" chi1-13.out | awk '{sum=0; sum += $2+$3+$4+$5+$6 ; print sum/5}' > chi1-13_avg.out
 
   # compute the Smoothen curve for AVG
-  if [ "$2" == "-smooth" ] ; then
+  if [ $smooth == 1 ] ; then
   echo "Computing average of the TS..."
   grep -v "#" chi1-13_avg.out | awk -v avg=$avg 'BEGIN{line=0 ; printf "%s\t%s\n", "#nFr","chi1"}{sum1+=$1;sum2+=$2} (NR%avg)==0{printf " %s\t%s\n", line, sum/avg ; sum=0 ; line=line+avg;}' > chi1-13_avg_smooth.out
   fi
@@ -630,6 +651,7 @@ fi
 #####################
 ## PLOT            ##
 #####################
+echo "## Plotting ##"
 if  [ $smooth == 1 ] ; then
    bash plotAll_smooth.sh 
 else
