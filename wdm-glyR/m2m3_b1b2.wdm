@@ -1,0 +1,26 @@
+# wordom
+
+BEGIN distance
+--TITLE A 
+--SELE /A/291/CA : /A/70/CA
+END
+
+BEGIN distance
+--TITLE B
+--SELE /B/291/CA : /B/70/CA
+END
+
+BEGIN distance
+--TITLE C
+--SELE /C/291/CA : /C/70/CA
+END
+
+BEGIN distance
+--TITLE D
+--SELE /D/291/CA : /D/70/CA
+END
+
+BEGIN distance
+--TITLE E
+--SELE /E/291/CA : /E/70/CA
+END
