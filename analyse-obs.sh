@@ -13,23 +13,6 @@ wordom="wordom"
 # Specify the size of the bins for the running average
 inp="inp-analyse.txt" 
 
-# HELP
-
-#if [ "$1" == "--help" ] || [ "$1" == "" ] ; then
-#
-#  echo " " 
-#  echo "Info: Argument missing : You may use this script with analyse.sh arg1 -misc arg2"
-#  echo "Info: Possible observables to analyze are :"
-#  echo "Info: tiltM2, tiltB, twist, DVP, PPS, LIG, hole, all"
-#  echo "Info: Check the code for further informations."
-#  echo "Info: Use the option -smooth to compute running averages of your data"
-#  # add end  and skip
-#  echo "Info: To obtains statistics on your data use: -stat beg (starting frame to analyze) end (last frame to analyze)"
-#  echo "Info: type analyse.sh --help to read this again." 
-#  echo " "
-#
-#fi
-
 ##############################################
 ## Parse list of anaylsis requiered by user ##
 ##############################################
