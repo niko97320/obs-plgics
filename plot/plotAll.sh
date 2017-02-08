@@ -20,12 +20,12 @@ EOF
 fi
 
 
-if [ -f GLY.out ] ; then 
+if [ -f LIG.out ] ; then 
   gnuplot << EOF
 set terminal pngcairo size 1000,700 enhanced font 'Verdana,10'
-set output 'RMSD-GLY.png'
-set title 'RMSD-GLY'
-plot "GLY.out" u 1:2 w l t "A" lc 3, "GLY.out" u 1:3 w l t "B" lc 1, "GLY.out" u 1:4 w l t "C" lc 7, "GLY.out" u 1:5 w l t "D" lc 8, "GLY.out" u 1:6 w l t "E" lc 6
+set output 'RMSD-LIG.png'
+set title 'RMSD-LIG'
+plot "LIG.out" u 1:2 w l t "A" lc 3, "LIG.out" u 1:3 w l t "B" lc 1, "LIG.out" u 1:4 w l t "C" lc 7, "LIG.out" u 1:5 w l t "D" lc 8, "LIG.out" u 1:6 w l t "E" lc 6
 EOF
 fi
 
