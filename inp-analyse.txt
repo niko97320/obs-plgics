@@ -18,9 +18,9 @@ tiltM2lower
 tiltM2full
 tiltB
 twist
-DVP
-GLU
-#IVMHB
+m2m3_b1b2
+LIG
+IVMHB
 PPS13
 PPS9
 PPS2
