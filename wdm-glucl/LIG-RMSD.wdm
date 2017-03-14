@@ -3,29 +3,29 @@
 BEGIN rmsd
 --TITLE A
 --FIT	/@(A|B)/@(29-40|48-59|118-129|141-150|202-210)/CA
---SELE	/AA/@(401)/*
+--SELE	/AA/@(401)/@(CA|CB|CD|CG|C|N) # backbone atoms of L-GLU
 END
 
 BEGIN rmsd
 --TITLE B
 --FIT   /@(B|C)/@(29-40|48-59|118-129|141-150|202-210)/CA
---SELE	/BB/@(401)/*
+--SELE	/BB/@(401)/@(CA|CB|CD|CG|C|N)
 END
 
 BEGIN rmsd
 --TITLE C
 --FIT   /@(C|D)/@(29-40|48-59|118-129|141-150|202-210)/CA
---SELE  /CC/@(401)/*
+--SELE  /CC/@(401)/@(CA|CB|CD|CG|C|N)
 END
 
 BEGIN rmsd
 --TITLE D
 --FIT   /@(D|E)/@(29-40|48-59|118-129|141-150|202-210)/CA
---SELE  /DD/@(401)/*
+--SELE  /DD/@(401)/@(CA|CB|CD|CG|C|N)
 END
 
 BEGIN rmsd
 --TITLE E
 --FIT   /@(E|A)/@(29-40|48-59|118-129|141-150|202-210)/CA
---SELE  /EE/@(401)/*
+--SELE  /EE/@(401)/@(CA|CB|CD|CG|C|N)
 END
